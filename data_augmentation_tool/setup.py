@@ -13,7 +13,7 @@ setup(name='data_augmentation_tool',
                 'data_augmentation_tool.augmentation',
                 'data_augmentation_tool.utils',],
       package_dir={'': 'src'},
-      scripts=[],
+      scripts=['scripts/simple_data_augmentation.py'],
       install_requires=['hdf5'],
       zip_safe=False)
 

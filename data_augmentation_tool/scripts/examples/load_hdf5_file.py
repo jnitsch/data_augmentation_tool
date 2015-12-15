@@ -23,6 +23,7 @@ def main():
     label = io.load_hdf5_labels(filename)
     img = io.load_hdf5_img(filename)
 
+
     if img.shape[1] is 1:
         print 'Images are grayscale'
 
