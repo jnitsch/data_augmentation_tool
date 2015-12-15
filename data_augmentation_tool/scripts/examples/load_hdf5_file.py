@@ -32,7 +32,7 @@ def main():
 
     for label_it in range(0,amount_classes):
         idx = label.tolist().index(label_it)
-        window_name = 'Label ' + str(idx)
+        window_name = 'Label ' + str(label_it)
         util.show_single_img_named(img[idx,0,:,:], window_name)
 
 if __name__ == "__main__":
