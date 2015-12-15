@@ -11,6 +11,13 @@ from random import randint
 
 
 def extract_patch(img, patchsize):
+    """Extracts random patch from imag
+
+    @param img Input image where patch should be selected
+    @param patchsize Size of patch (width  = height = patchsize)
+
+    @return The extracted patch
+    """
     height, width = img.shape[:2]
 
     sz = int(patchsize /2)
@@ -22,6 +29,14 @@ def extract_patch(img, patchsize):
 
 
 def extract_patch_fliplr(img, patchsize):
+    """Extracts random patch from image and rotate it by randomly by 0, 90,180 or 270 degree
+
+    @param img Input image where patch should be selected
+    @param patchsize Size of patch (width  = height = patchsize)
+
+    @return The extracted patch
+    """
+
     #extract patch
     patch = extract_patch(img, patchsize)
     rows,cols = patch.shape

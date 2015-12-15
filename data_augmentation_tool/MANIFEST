@@ -2,6 +2,8 @@
 setup.py
 src/data_augmentation_tool/__init__.py
 src/data_augmentation_tool/augmentation/__init__.py
+src/data_augmentation_tool/augmentation/normalization.py
+src/data_augmentation_tool/augmentation/transformations.py
 src/data_augmentation_tool/io/__init__.py
 src/data_augmentation_tool/io/load_hdf5_data.py
 src/data_augmentation_tool/io/load_images.py

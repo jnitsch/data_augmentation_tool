@@ -32,6 +32,11 @@ def load_hdf5_img(filename):
 
 
 def print_dimensions(filename, dataset):
+    """Debug function for printing dimaensions of dataset in file
+
+    @param filename The absolute filename of the database.
+    @param dataset  The dataset in the database(at filename)
+    """
     file_id = h5py.File(filename, 'r')
     dset = file_id[dataset]
     print 'Dataset %s has dimension %d' % dataset, dset.shape

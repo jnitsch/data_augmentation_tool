@@ -8,7 +8,27 @@ alphabetically!!! So the labels will correspond to classes sorted alphabetically
 import os
 import cv2
 
+
 def read_img_labels(folder):
+    """Reads in images which are stored in the folder/classes
+
+    Reads in all images which are stored in following structure
+    /folder
+    --/class_0
+    --/--/img_0
+    --/--/img_1
+    --/--/...
+    --/class_1
+    --/--/img_0
+    --/--/img_1
+    --/...
+    The naming of the folders or the images doesn't matter. The images must be stored in a format so that opencv can
+    read them via cv2.imread. It sorts the classes alphabetically!
+
+    @param folder The folder which contains the subfolder with different classes.
+
+    @return Returns images as list, and the corresponding labels in seperate list. Third Parameter tells how many different classes were found.
+    """
     class_index = 0
     labels = []
     images = []

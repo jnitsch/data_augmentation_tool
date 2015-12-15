@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
 """
-loads img from folder and shows one image of each folder
+loads img from folder and shows one image of each folder and the normalized version of each img
 """
 __author__ = 'Julia Nitsch'
 import argparse
 import data_augmentation_tool.utils.visualization as util
 import data_augmentation_tool.io.load_images as io
+import data_augmentation_tool.augmentation.normalization as au
 
 def main():
     parser = argparse.ArgumentParser(description='''
@@ -22,6 +23,8 @@ def main():
         idx = labels.index(label_it)
         window_name = 'Label ' + str(label_it)
         util.show_single_img_named(images[idx], window_name)
+        normalized = au.std_normalization(images[idx])
+        util.show_single_img_named(normalized, window_name)
 
 if __name__ == "__main__":
     main()
