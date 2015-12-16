@@ -34,7 +34,18 @@ def main():
     for label_it in range(0,amount_classes):
         idx = label.tolist().index(label_it)
         window_name = 'Label ' + str(label_it)
-        util.show_single_img_named(img[idx,0,:,:], window_name)
+        #util.show_single_img_named(img[idx,0,:,:], window_name)
+
+    # check the written data -> load dataset and visualize first 1000 images of each class
+    for label_it in range(0,amount_classes):
+        idx = label.tolist().index(label_it)
+        window_name = 'Label ' + str(label_it)
+        img_to_viz = []
+        for img_idx in range(0,99):
+            img_to_viz.append(img[idx + img_idx, 0, :, :])
+
+        util.show_patches(img_to_viz, window_name)
+
 
 if __name__ == "__main__":
     main()
