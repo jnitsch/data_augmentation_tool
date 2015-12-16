@@ -1,4 +1,4 @@
-__author__ = 'jnitsch'
+__author__ = 'Julia Nitsch'
 """@package data_augmentation_tool.io.load_images
 Functions to load all images from folder.
 

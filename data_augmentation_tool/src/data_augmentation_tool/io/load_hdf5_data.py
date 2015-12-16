@@ -1,4 +1,4 @@
-__author__ = 'jnitsch'
+___author__ = 'Julia Nitsch'
 """@package data_augmentation_tool.io.load_df5_data
 Functions to load a file which is saved for being readable for caffe.
 

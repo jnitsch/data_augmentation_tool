@@ -1,4 +1,4 @@
-__author__ = 'jnitsch'
+__author__ = 'Julia Nitsch'
 """@package data_augmentation_tool.utils.visualization
 Functions for convently visualizing data.
 
