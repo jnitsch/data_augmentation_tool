@@ -89,8 +89,6 @@ def main():
 
     file.close()
 
-
-
     # not a good idea -> too much memory
     # write.write_dataset(name, img_np_array, label_np_array)
 
@@ -106,9 +104,6 @@ def main():
             img_to_viz.append(loaded_images[idx + img_idx, 0, :, :])
 
         viz.show_patches(img_to_viz, window_name)
-
-
-
 
     print 'Finished!'
 

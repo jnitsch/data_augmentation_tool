@@ -23,6 +23,8 @@ import data_augmentation_tool.augmentation.transformations as transformation
 import data_augmentation_tool.augmentation.normalization as normalization
 import data_augmentation_tool.io.write_hdf5_file as write
 import numpy as np
+import data_augmentation_tool.io.load_hdf5_data as io_h5
+import data_augmentation_tool.utils.visualization as viz
 
 def main():
     parser = argparse.ArgumentParser(description='''
@@ -83,7 +85,18 @@ def main():
     # write it to file
     write.write_dataset(name, img_np_array, label_np_array)
 
+    # check the written data -> load dataset and visualize first 1000 images of each class
+    loaded_labels = io_h5.load_hdf5_labels(name)
+    loaded_images = io_h5.load_hdf5_img(name)
 
+    for label_it in range(0,amount_classes):
+        idx = loaded_labels.tolist().index(label_it)
+        window_name = 'Label ' + str(label_it)
+        img_to_viz = []
+        for img_idx in range(0,100):
+            img_to_viz.append(loaded_images[idx + img_idx, 0, :, :])
+
+        viz.show_patches(img_to_viz, window_name)
 
     print 'Finished!'
 

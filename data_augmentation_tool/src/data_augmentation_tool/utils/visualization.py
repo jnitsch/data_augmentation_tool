@@ -37,7 +37,6 @@ def show_patches(patches, windowname):
     img_col = int(math.sqrt(amount_patches))
     img_row = amount_patches / img_col
     rows,cols = patches[0].shape[:2]
-
     img = np.zeros([(img_row * rows), (img_col * cols)])
 
     row_idx = 0
@@ -45,6 +44,7 @@ def show_patches(patches, windowname):
     for i, patch in enumerate(patches):
         current_row = row_idx * rows
         current_col = col_idx * cols
+
         img[current_row:(current_row + rows), current_col:(current_col + cols)] = patch
 
         # next image should be in next col
