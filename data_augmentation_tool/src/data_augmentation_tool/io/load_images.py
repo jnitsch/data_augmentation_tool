@@ -45,8 +45,8 @@ def read_img_labels(folder):
 
             for file in os.listdir(dir_path):
                 print '  ' + file
-                img = cv2.imread(os.path.join(dir_path, file))
-                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                gray = cv2.imread(os.path.join(dir_path, file), cv2.CV_LOAD_IMAGE_GRAYSCALE)
+
                 images.append(gray)
                 labels.append(class_index)
 
