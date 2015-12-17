@@ -41,7 +41,8 @@ def main():
         --/...
     It performs simple data augmentation on the images and extracts patches with defined size. The augmented data is then
     stored in the defined file containing a /data and a /label dataset. This datasets have the 'right' dimensions for caffe
-    and can be directly used for learning. The amount of samples per image is defined through an argument.
+    and can be directly used for learning. The amount of samples per image is defined through an argument. This script
+    can handle a huge amount of data BUT is VERY SLOW!
     ''', formatter_class=RawTextHelpFormatter)
     parser.add_argument('--folder', help='folder where different classes are stored', default='')
     parser.add_argument('--filename', help='name of file which is stored', default='')

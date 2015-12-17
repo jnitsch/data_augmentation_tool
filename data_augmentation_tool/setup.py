@@ -15,7 +15,8 @@ setup(name='data_augmentation_tool',
       package_dir={'': 'src'},
       scripts=['scripts/simple_data_augmentation.py',
                'scripts/data_augmentation.py',
-               'scripts/data_augmentation_small_data.py'],
+               'scripts/data_augmentation_small_data.py',
+               'scripts/simple_data_augmentation_small_data.py'],
       install_requires=['h5py'],
       zip_safe=False)
 
