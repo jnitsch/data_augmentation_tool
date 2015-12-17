@@ -21,10 +21,10 @@ def std_normalization(patch):
 
     # normalize for mean
     mean, std = cv2.meanStdDev(img)
-    img = img - mean
+    img = np.subtract(img, mean)
 
     # normalize for standard dev
-    if np.isnan(std).any():
+    if np.isnan(std).any() or std < 0.00000001:
         std = 1.0
 
     img = np.divide(img, std)

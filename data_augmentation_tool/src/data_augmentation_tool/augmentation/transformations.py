@@ -76,7 +76,7 @@ def extract_patch_rotation(img, patchsize):
     rot = randint(0,359)
     rows,cols = img.shape[:2]
     M = cv2.getRotationMatrix2D((cols/2,rows/2),rot,1)
-    rotated_img = cv2.warpAffine(img,M,(cols, rows),flags=cv2.WARP_INVERSE_MAP,borderMode=cv2.BORDER_REPLICATE)
+    rotated_img = cv2.warpAffine(img,M,(cols, rows),flags=cv2.WARP_INVERSE_MAP,borderMode=cv2.BORDER_REFLECT_101)
     # extract patch from rotated image
     patch = extract_patch(rotated_img, patchsize)
 
@@ -101,7 +101,7 @@ def extract_patch_rotation_scale(img, patchsize):
     # resize img
     resized_height = int(height * scale)
     resized_width = int(width * scale)
-    resized_img = cv2.resize(img, (resized_height, resized_width))
+    resized_img = cv2.resize(img, (resized_width, resized_height), interpolation = cv2.INTER_LINEAR)
 
     # extract image of rotated img
     patch = extract_patch_rotation(resized_img, patchsize)
