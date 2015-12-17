@@ -72,7 +72,7 @@ def main():
             # compute current idx
             save_idx = img_idx * samples_per_img + patch_idx
             # extract patch
-            patch = transformation.extract_patch_fliplr(images[patch_idx], patch_size)
+            patch = transformation.extract_patch_fliplr(images[img_idx], patch_size)
             # normalize patch
             normalized_patch = normalization.std_normalization(patch)
             # save stuff in datastructure
