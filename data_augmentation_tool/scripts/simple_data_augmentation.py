@@ -23,6 +23,9 @@ import data_augmentation_tool.augmentation.transformations as transformation
 import data_augmentation_tool.augmentation.normalization as normalization
 import data_augmentation_tool.io.write_hdf5_file as write
 import numpy as np
+import data_augmentation_tool.utils.visualization as viz
+import data_augmentation_tool.io.load_hdf5_data as io_h5
+
 
 def main():
     parser = argparse.ArgumentParser(description='''
@@ -54,31 +57,48 @@ def main():
     # read in images
     images, labels, amount_classes = io.read_img_labels(folder)
 
-    # construct array for images [#images, #channels, width, height]
-    shape_img = (samples_per_img*len(images), 1, patch_size, patch_size)
-    dt = np.float32
-    img_np_array = np.empty(shape_img,dtype=dt)
+    # construct file
+    file, dset_img, dset_label = write.create_database(name, patch_size, 1)
 
-    # construct array for label
-    shape_label = (samples_per_img*len(images), 1)
-    label_np_array = np.empty(shape_label,dtype=dt)
+    # datatype used to store data
+    dt = np.float32
+
+    # size of datat blocks which are written to file
+    shape_img = (samples_per_img, 1, patch_size, patch_size)
+    shape_label = (samples_per_img, 1)
 
     # perform augmentation
     for img_idx, img in enumerate(images):
+        img_np_array = np.zeros(shape_img,dtype=dt)
+        label_np_array = np.zeros(shape_label,dtype=dt)
         for patch_idx in range(0,samples_per_img):
             # compute current idx
-            save_idx = img_idx * samples_per_img + patch_idx
+            save_idx = patch_idx
             # extract patch
-            patch = transformation.extract_patch_fliplr(images[patch_idx], patch_size)
+            patch = transformation.extract_patch_fliplr(images[img_idx], patch_size)
             # normalize patch
             normalized_patch = normalization.std_normalization(patch)
             # save stuff in datastructure
             img_np_array[save_idx, 0, :, :] = normalized_patch
             label_np_array[save_idx,0] = labels[img_idx]
+        write.extend_img(dset_img, img_np_array)
+        write.extend_labels(dset_label, label_np_array)
 
 
-    # write it to file
-    write.write_dataset(name, img_np_array, label_np_array)
+    # check the written data -> load dataset and visualize first 1000 images of each class
+    loaded_labels = io_h5.load_hdf5_labels(name)
+    loaded_images = io_h5.load_hdf5_img(name)
+
+    for label_it in range(0,amount_classes):
+        img_np_array = np.zeros(shape_img,dtype=dt)
+        label_np_array = np.zeros(shape_label,dtype=dt)
+        idx = loaded_labels.tolist().index(label_it)
+        window_name = 'Label ' + str(label_it)
+        img_to_viz = []
+        for img_idx in range(0,100):
+            img_to_viz.append(loaded_images[idx + img_idx, 0, :, :])
+
+        viz.show_patches(img_to_viz, window_name)
 
 
 
