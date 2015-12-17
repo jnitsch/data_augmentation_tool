@@ -8,6 +8,7 @@ Contains helper functions to visualize different data
 import numpy as np
 import cv2
 import copy
+import math
 
 def show_single_img(img):
     """Shows img with opencv window name 'Single Image'. Waits blocking until user presses any key.
@@ -31,12 +32,13 @@ def show_single_img_named(img, window_name):
 
 def show_patches(patches, windowname):
     amount_patches = len(patches)
-    # contain 20 images per coloum
-    img_col = 20
-    img_row = amount_patches / img_col + 1
+
+    # make more or less quadratic window
+    img_col = int(math.sqrt(amount_patches))
+    img_row = amount_patches / img_col
     rows,cols = patches[0].shape[:2]
-    print 'Rows: %d Cols: %d' % (rows, cols)
-    img = np.empty([(img_row * rows), (img_col * cols)])
+
+    img = np.zeros([(img_row * rows), (img_col * cols)])
 
     row_idx = 0
     col_idx = 0
@@ -52,10 +54,6 @@ def show_patches(patches, windowname):
         if col_idx % img_col == 0:
             col_idx = 0
             row_idx = row_idx + 1
-            #show_single_img_named(patch, 'test')
 
-
-    # because images were normalized multiply them by 255
-    np.multiply(img, 255.0)
 
     show_single_img_named(img, windowname)
