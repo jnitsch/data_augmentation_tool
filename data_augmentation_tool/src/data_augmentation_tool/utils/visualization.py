@@ -25,7 +25,7 @@ def show_single_img_named(img, window_name):
     @param img The image which is shown.
     @param window_name The name of the opencv window which displays the img
     """
-    cv2.imshow(window_name, img)
+    cv2.imshow(window_name, img) # correct the range here, such that [-5 +5] --> [black white]
     cv2.waitKey(0)
     cv2.destroyWindow(window_name)
 
