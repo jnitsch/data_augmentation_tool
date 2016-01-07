@@ -25,7 +25,21 @@ def show_single_img_named(img, window_name):
     @param img The image which is shown.
     @param window_name The name of the opencv window which displays the img
     """
-    cv2.imshow(window_name, img) # correct the range here, such that [-5 +5] --> [black white]
+
+    # flaoting point image -> normalize to 0, 1
+    (min_val, max_val, min_loc, max_loc) = cv2.minMaxLoc(img)
+
+    img_viz = img.copy()
+
+    if min_val < 0:
+        # if minval is negative ad abs(min_val) and divide by (abs(min_val) + max_val)
+        img_viz = img_viz + math.fabs(min_val)
+        img_viz = img_viz / (math.fabs(min_val) + max_val)
+    else:
+        # if minval is positive divide by max_val
+        img_viz = img_viz / (max_val)
+
+    cv2.imshow(window_name, img_viz)
     cv2.waitKey(0)
     cv2.destroyWindow(window_name)
 
